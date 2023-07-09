@@ -1,22 +1,21 @@
 # Keyboard: keydown and keyup
 
-Before we get to keyboard, please note that on modern devices there are other ways to "input something". For instance, people use speech recognition (especially on mobile devices) or copy/paste with the mouse.
+قبل از اینکه به صفحه کلید بپردازیم، این موضوع را درنظر داشته باشید که در دیوایس‌های جدید ورودی های دیگری مثل تشخیص صدا (به خصوص در موبایل‌ها) و یا کپی و پیست با موس نیز وجود دارد.
 
-So if we want to track any input into an `<input>` field, then keyboard events are not enough. There's another event named `input` to track changes of an `<input>` field, by any means. And it may be a better choice for such task. We'll cover it later in the chapter <info:events-change-input>.
+بنابراین اگر بخواهیم هرگونه ورودی به یک فیلد `<input>` را ر دیابی کنیم، این event کافی نیست. event دیگری به نام `input` وجود دارد که هر گونه تغییر در فیلد `<input>` از هر طریقی را ردیابی میکند. انجام اینکار انتخاب بهتری برای این مورد است. بعدا درباره این موضوع صحبت خواهیم کرد.<info:events-change-input>.
 
-Keyboard events should be used when we want to handle keyboard actions (virtual keyboard also counts). For instance, to react on arrow keys `key:Up` and `key:Down` or hotkeys (including combinations of keys).
-
+زمانی که ما میخواهیم حرکات صفحه کلید را رهگیری کنیم باید از event‌های صفحه کلید استفاده کنیم. برای مثال در مواقعی که بخواهیم فشردن یا رهاکردن کلیدی (ویا ترکیبی از آنها) را تشخیص دهیم
 
 ## Teststand [#keyboard-test-stand]
 
 ```offline
-To better understand keyboard events, you can use the [teststand](sandbox:keyboard-dump).
+برای درک بهتر رویدادهای (event) صفحه کلید، شما میتوانید از [teststand](sandbox:keyboard-dump) استفاده کنید.
 ```
 
 ```online
-To better understand keyboard events, you can use the teststand below.
+برای درک بهتر رویدادهای (event) صفحه کلید شما میتوانید از روش زیر استفاده کنید.
 
-Try different key combinations in the text field.
+ترکیب کلیدهای مختلف را در جعبه متن امتحان کنید.
 
 [codetabs src="keyboard-dump" height=480]
 ```
@@ -24,11 +23,11 @@ Try different key combinations in the text field.
 
 ## Keydown and keyup
 
-The `keydown` events happens when a key is pressed down, and then `keyup` -- when it's released.
+رویداد `keydown` زمانی اتفاق می‌افتد که کلیدی فشرده شود و سپس رویداد `keyup` اتفاق می‌افتد در زمانیکه آن کلید رها شود.
 
 ### event.code and event.key
 
-The `key` property of the event object allows to get the character, while the `code` property of the event object allows to get the "physical key code".
+ویژگی `key`روی به ما اجازه میدهد که کاراکتر کلید را دریافت کنیم درحالیکه ویژگی `code` رویداد به ما اجازه دریافت کد فیزیکی کلید را میدهد.
 
 For instance, the same key `key:Z` can be pressed with or without `key:Shift`. That gives us two different characters: lowercase `z` and uppercase `Z`.
 
