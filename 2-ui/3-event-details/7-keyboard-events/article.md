@@ -29,9 +29,9 @@
 
 ویژگی `key`روی به ما اجازه میدهد که کاراکتر کلید را دریافت کنیم درحالیکه ویژگی `code` رویداد به ما اجازه دریافت کد فیزیکی کلید را میدهد.
 
-For instance, the same key `key:Z` can be pressed with or without `key:Shift`. That gives us two different characters: lowercase `z` and uppercase `Z`.
+برای مثال کلید z `key:Z` میتواند با کلید شیفت یا بدون آن `key:Shift` فشرده شود. این ترکیب دو نتیجه متفاوت به ما خواهد داد:  `z` و `Z`.
 
-The `event.key` is exactly the character, and it will be different. But `event.code` is the same:
+مقدار `event.key`  دقیقا کاراکتر تایپ شده خواهد بود که دو مقدار متفاوت است. اما مقدار `event.code`  یکسان است:
 
 | Key          | `event.key` | `event.code` |
 |--------------|-------------|--------------|
@@ -39,29 +39,30 @@ The `event.key` is exactly the character, and it will be different. But `event.c
 | `key:Shift+Z`|`Z` (uppercase)          |`KeyZ`        |
 
 
-If a user works with different languages, then switching to another language would make a totally different character instead of `"Z"`. That will become the value of `event.key`, while `event.code` is always the same: `"KeyZ"`.
+اگر یک کاربر با صفحه کلید به زبان دیگری غیر از انگلیسی کار کند آنگاه خروجی `event.key` با `"Z"` متفاوت خواهد بود. در صورتیکه مقدار `event.code` همواره یکسان است.
 
 ```smart header="\"KeyZ\" and other key codes"
-Every key has the code that depends on its location on the keyboard. Key codes described in the [UI Events code specification](https://www.w3.org/TR/uievents-code/).
+هر کلیدی یک کد دارد که باتوجه به مکان آن روی صفحه کلید متفاوت است. Key code ها در لینک مقابل توضیح داده شده است.[UI Events code specification](https://www.w3.org/TR/uievents-code/).
 
-For instance:
-- Letter keys have codes `"Key<letter>"`: `"KeyA"`, `"KeyB"` etc.
-- Digit keys have codes: `"Digit<number>"`: `"Digit0"`, `"Digit1"` etc.
-- Special keys are coded by their names: `"Enter"`, `"Backspace"`, `"Tab"` etc.
+برای مثال:
+- key code حروف برابر است با: `"Key<letter>"` `"KeyA"`, `"KeyB"` etc.
+- key code اعداد برابر است با `"Digit<number>"`: `"Digit0"`, `"Digit1"` etc.
+- کلیدهای خاص با اسم خودشان کد شده‌اند: `"Enter"`, `"Backspace"`, `"Tab"` etc.
 
 There are several widespread keyboard layouts, and the specification gives key codes for each of them.
+چندین طرح و چیدمان برای صفحه‌کلید وجود دارد که هرکدام کدهای خاص خودشان را دارند.
 
-Read the [alphanumeric section of the spec](https://www.w3.org/TR/uievents-code/#key-alphanumeric-section) for more codes, or just press a key in the [teststand](#keyboard-test-stand) above.
+مقاله [alphanumeric section of the spec](https://www.w3.org/TR/uievents-code/#key-alphanumeric-section) را مطالعه کنید, یا در قسمت بالا [teststand](#keyboard-test-stand) برای دریافت کد کلید آنرا فشار دهید.
 ```
 
 ```warn header="Case matters: `\"KeyZ\"`, not `\"keyZ\"`"
-Seems obvious, but people still make mistakes.
+به نظر ساده و قابل درک است, اما بعضی افراد هنوز دچار مشکل می‌شوند..
 
-Please evade mistypes: it's `KeyZ`, not `keyZ`. The check like `event.code=="keyZ"` won't work: the first letter of `"Key"` must be uppercase.
+در هنگام تایپ به املا درست آن بسیار دفت کنید: `KeyZ` درست است, نه `keyZ`. مثلا عبارت `event.code=="keyZ"` درست کار نخواهد کرد: عبارت `"Key"` باید با حرف بزرگ باشد.
 ```
 
-What if a key does not give any character? For instance, `key:Shift` or `key:F1` or others. For those keys, `event.key` is approximately the same as `event.code`:
-
+اگر که دکمه‌ای کاراکتر خروجی نداشته باشد چه? برای مثال, `key:Shift` یا `key:F1` یا کلیدهای دیگر. برای این دسته از کلیدها, `event.key` و `event.code` مقدار یکسانی خواهد بود:
+اگر که 
 | Key          | `event.key` | `event.code` |
 |--------------|-------------|--------------|
 | `key:F1`      |`F1`          |`F1`        |
