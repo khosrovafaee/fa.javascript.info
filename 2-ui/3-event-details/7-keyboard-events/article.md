@@ -61,23 +61,23 @@ There are several widespread keyboard layouts, and the specification gives key c
 در هنگام تایپ به املا درست آن بسیار دفت کنید: `KeyZ` درست است, نه `keyZ`. مثلا عبارت `event.code=="keyZ"` درست کار نخواهد کرد: عبارت `"Key"` باید با حرف بزرگ باشد.
 ```
 
-اگر که دکمه‌ای کاراکتر خروجی نداشته باشد چه? برای مثال, `key:Shift` یا `key:F1` یا کلیدهای دیگر. برای این دسته از کلیدها, `event.key` و `event.code` مقدار یکسانی خواهد بود:
-اگر که 
+اگر دکمه‌ای کاراکتر خروجی نداشته باشد چه? برای مثال, `key:Shift` یا `key:F1` یا کلیدهای دیگر. برای این دسته از کلیدها, `event.key` و `event.code` مقدار یکسانی خواهد بود:
+
 | Key          | `event.key` | `event.code` |
 |--------------|-------------|--------------|
 | `key:F1`      |`F1`          |`F1`        |
 | `key:Backspace`      |`Backspace`          |`Backspace`        |
 | `key:Shift`|`Shift`          |`ShiftRight` or `ShiftLeft`        |
 
-Please note that `event.code` specifies exactly which key is pressed. For instance, most keyboards have two `key:Shift` keys: on the left and on the right side. The `event.code` tells us exactly which one was pressed, and `event.key` is responsible for the "meaning" of the key: what it is (a "Shift").
+درنظر داشته باشد که `event.code` مشخص میکند که دقیقا کدام دکمه فشرده شده است. برای مثال اکثر صفحه‌کلیدها دو کلید shift یکی در سمت راست و یکی در سمت چپ صفحه کلید دارند. عبارت `event.code` به ما میگوید که دقیقا کدام کلید فشار داده شده و عبارت `event.key` وظیفه دارد که مقدار آن کلید را به ما برگرداند که در اینجا مقدار shift است.
 
-Let's say, we want to handle a hotkey: `key:Ctrl+Z` (or `key:Cmd+Z` for Mac). Most text editors hook the "Undo" action on it. We can set a listener on `keydown` and check which key is pressed.
+فرض کنید که میخواهیم که فشرده شدن کلیدهای `Ctrl+Z` (یا `key:Cmd+Z` برای Mac) کنترل و شناسایی کنیم. بیشتر ویرایشگرهای متن این دو دکمه را برای "Undo" قرار داده‌اند. ما میتوانیم روی `keydown` یک listener قرار دهیم و ببینیم کدام دکمه‌ها فشرده شده است.
 
-There's a dilemma here: in such a listener, should we check the value of `event.key` or `event.code`?
+در اینجاب برای ما سوالی پیش می‌آید: یا listener باید مقدار `event.key` را بررسی کند و یا مقدار `event.code`?
 
-On one hand, the value of `event.key` is a character, it changes depending on the language. If the visitor has several languages in OS and switches between them, the same key gives different characters. So it makes sense to check `event.code`, it's always the same.
+از طرفی مقدار `event.key` یک کاراکتر است و باتوجه به زبان صفحه کلید مقدار آن تغییر میکند. اگر کاربر در سیستم عاملش بیشتر یک سیستم عامل داته باشد و زبان را تغییر دهد آنگاه یک کلید واحد خروجی متفاوتی خواهد داشت.. بنابراین منطقی است که ما مقدار `event.code` را بررسی کنیم چراکه همواره مقدار ثابتی دارد.
 
-Like this:
+مثل این:
 
 ```js run
 document.addEventListener('keydown', function(event) {
